@@ -22,20 +22,29 @@ class AppUtils:
         return channel_id in cls.allowed_channels()
     
     @classmethod
-    def process_xml(cls, xml_content:str):    
+    def process_xml(cls, xml_content:str) -> dict:    
         tree = ET.fromstring(xml_content)
         # clean programs
+        programs_count = 0
+        channels_count = 0
         for program in tree.findall('programme'):
             if not cls.is_channel_allowed(program.attrib['channel']):
                 tree.remove(program)
-
+            programs_count += 1
+            
         # clean channels
         for channel in tree.findall('channel'):
             if not cls.is_channel_allowed(channel.attrib['id']):
                 tree.remove(channel)
-
-        return ET.tostring(tree, encoding='utf8', method='xml')
-
+            channels_count += 1
+            
+        return {
+            'xml': ET.tostring(tree, encoding='utf8', method='xml'),
+            'programs_count': programs_count,
+            'channels_count': channels_count
+        }
+    
+    
     
           
 
