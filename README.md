@@ -13,6 +13,12 @@ To run the development server
 - The `Dockerfile` is the main dockerfile for this project and it is deployment-ready
 - The `nginx.conf` is valid and `proxy_pass` address should be changed on main server to `http://localhost:8080` (EC2)
 
+## Running on Rocky 8
+- You need to first install all the packages specified in the `requirements.txt`
+- Run the `start-on-rocky.sh` file
+- first, make the script executable `chmod +x start-on-rocky.sh`
+- Run the script `./start-on-rocky.sh`
+- Visit `http://localhost:8080`
 
 
 

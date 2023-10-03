@@ -17,9 +17,12 @@ from utils import AppUtils
 from dotenv import load_dotenv
 load_dotenv()
 
+USE_ROCKY_8 = os.getenv("USE_ROCKY_8", False)
 # sanity checks
 app_config = configparser.ConfigParser()
-app_config.read('config.ini')
+config_file = "config.rocky.ini" if USE_ROCKY_8 else "config.ini"
+app_config.read(config_file)
+
 if 'reroute' not in app_config.sections():
     raise ImproperlyConfiguredApp("No reroute section in config.ini")
 
@@ -78,7 +81,7 @@ def proxy_entry():
             strict=False, 
             interpolation=None
         )
-        config.read('config.ini')
+        config.read(config_file)
 
         reroute_sections = config["reroute"]
         if provider.lower() not in reroute_sections:
