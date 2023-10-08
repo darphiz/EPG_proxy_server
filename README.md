@@ -20,5 +20,9 @@ To run the development server
 - Run the script `./start-on-rocky.sh`
 - Visit `http://localhost:8080`
 
-
+## Logging
+- There are several log levels which can be configured
+- Log levels includes `Debug`, `Info`, `Warning`, `Error`, `Extract`
+- To set the log level, add the `log` query parameter
+- For example, http://127.0.0.1:5000/?large&log=extract where `large` is the source and `extract` is the log level.
 
